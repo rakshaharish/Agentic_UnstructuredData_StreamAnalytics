@@ -1,9 +1,9 @@
-# Agentic Unstructured Data Stream Analytics
+#  🌟 Agentic Unstructured Data Stream Analytics
 Enterprise-grade, event-driven multi-source data ingestion pipeline with AI Agent orchestration.
 
 This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic credit card transactions (graph data, document data and key-value data sources) into a multi-topic Kafka broker, processes continuous micro-batches using Apache Spark Structured Streaming, and utilizes a stateful LangGraph AI Consumer (Agent-2) to enforce schema definitions and build a curated, structured historical layer. The entire system is monitored via Streamlit frontend and orchestratable via Apache Airflow. The whole application is containerized using docker-compose.
 
-## Concepts & Technologies
+##  ✨ Concepts & Technologies
 1. Python - Development Programming Language
 2. Graph Data (neo4j), Key-Value Data (redis), Document Data (mongo) - Types of unstructured data ingested in the project
 3. LangChain, LangGraph - AI agent development
@@ -13,7 +13,7 @@ This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic cred
 7. Docker - Containerization & Deployment
 8. VS Code - IDE for development
 
-## Repository Architecture
+## 📁 Repository Structure
 ```text
 data-agent-pipeline/
 ├── docker-compose.yml          # Infrastructure: Multi-topic Kafka cluster broker
