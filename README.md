@@ -4,7 +4,7 @@ Enterprise-grade, event-driven multi-source data ingestion pipeline with AI Agen
 This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic credit card transactions (graph data, document data and key-value data sources) into a multi-topic Kafka broker, processes continuous micro-batches using Apache Spark Structured Streaming, and utilizes a stateful LangGraph AI Consumer (Agent-2) to enforce schema definitions and build a curated, structured historical layer. The entire system is monitored via Streamlit frontend and orchestratable via Apache Airflow. The whole application is containerized using docker-compose.
 
 ## Repository Architecture
-data-agent-pipeline/
+```data-agent-pipeline/
 ├── docker-compose.yml          # Infrastructure: Multi-topic Kafka cluster broker
 ├── requirements.txt            # Python deployment dependencies
 ├── historical_warehouse.db     # Embedded Data Lake (Auto-generated landing & history tables)
@@ -23,3 +23,4 @@ data-agent-pipeline/
     │   └── ai_agent.py         # Agent 2: Stateful LangGraph schema enforcement engine
     └── app/
         └── Streamlit_UI.py               # Streamlit orchestration & monitoring panel
+```
