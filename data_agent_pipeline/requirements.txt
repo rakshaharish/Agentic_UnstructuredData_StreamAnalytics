@@ -1,1 +1,11 @@
-
+streamlit==1.38.0
+pyspark==3.4.1
+redis==5.0.8
+neo4j==5.23.0
+pymongo==4.8.0
+kafka-python==2.0.2
+langchain-core==0.2.35
+langchain-openai==0.1.22
+langgraph==0.2.14
+apache-airflow==2.9.3
+pandas==2.2.2
