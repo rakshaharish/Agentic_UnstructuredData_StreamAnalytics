@@ -21,7 +21,7 @@ if "audit_report" not in st.session_state:
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("🛠️ Operations Dashboard")
+    st.subheader("🛠️ Step-1 : Operations Dashboard")
     if st.button("🚀 Boot Infrastructure Setup"):
         subprocess.Popen(["docker-compose", "up", "-d"])
         st.success("Docker streaming components active!")
@@ -31,7 +31,7 @@ with col1:
         st.success("Spark continuous transformer active!")
 
     st.markdown("---")
-    st.markdown("#### Agent 1: Synthetic Factory Generation")
+    st.markdown("#### Step-2 : Agent 1 - Synthetic Factory Generation")
     
     selected_mode = st.selectbox(
         "Source Data Format Choice",
@@ -84,7 +84,7 @@ with col1:
                 st.metric("VAL (amount)", f"${st.session_state.temp_payload.get('amount', 0.0)}")
 
     st.markdown("---")
-    st.markdown("#### Agent 2: Manual Consumer Override")
+    st.markdown("#### Step-3 : Agent 2 - Manual Consumer Override")
     if st.button("🤖 Run Consumer AI Agent Loop"):
         with st.spinner("Local Agent 2 processing landing zone metrics..."):
             
@@ -107,7 +107,7 @@ with col1:
 
 
 with col2:
-    st.subheader("📊 Lake Storage Visualizations")
+    st.subheader("📊 Step-4 : Data Lake Storage Visualizations")
     BASE_DIR = os.getcwd()
     STRUCTURED_HISTORY_FILE = os.path.join(BASE_DIR, "historical_data_lake", "structured_history.csv")
     
