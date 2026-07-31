@@ -1,16 +1,22 @@
 import json
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from src.producers.redis_keyval_producer import send_redis_event
 from src.producers.neo4j_graph_producer import send_neo4j_event
 from src.producers.mongo_documentdb_producer import send_mongo_event
 
-def run_synthetic_production_agent(openai_api_key):
+def run_synthetic_production_agent(): # (openai_api_key):
     """
     Agent 1 Core: Synthesizes high-fidelity financial data and pipes
     the transactional variants to the individual Kafka producers.
     """
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.7, openai_api_key=openai_api_key)
+    # llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.7, openai_api_key=openai_api_key)
+    llm = ChatOllama(
+        model="llama3",
+        temperature=0.7,
+        format="json"  # Forces the local model to only respond in clean JSON arrays/objects
+    )
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", """You are an AI financial data generation engine. 
@@ -34,9 +40,8 @@ def run_synthetic_production_agent(openai_api_key):
         # Invoke your individual multi-topic producers
         send_redis_event(data['user'], data['merchant'], data['amount'])
         send_neo4j_event(data['user'], data['merchant'], data['amount'])
-        send_mongo_event("tx-automated-id", data['user'], data['merchant'], data['amount'])
+        send_mongo_event("tx-local-ollama", data['user'], data['merchant'], data['amount'])
         
         return {"status": "success", "user": data['user'], "amount": data['amount']}
     except Exception as e:
         return {"status": "error", "message": str(e)}
-

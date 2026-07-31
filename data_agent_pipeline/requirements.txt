@@ -6,7 +6,9 @@ pymongo
 kafka-python
 langchain-core
 langchain-openai
+langchain-ollama
 langgraph
 apache-airflow
 langchain
 pandas
+numpy
