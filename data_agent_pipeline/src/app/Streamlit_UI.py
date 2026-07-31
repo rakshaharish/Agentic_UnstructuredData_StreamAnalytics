@@ -3,6 +3,8 @@ import subprocess
 import sys
 import sqlite3
 import pandas as pd
+from src.producers.ai_agent_data_synthesizer import run_synthetic_production_agent
+from src.schema_enforcer_agent.ai_agent import build_consumer_agent
 
 st.set_page_config(layout="wide", page_title="AI Data Platform Hub")
 st.title("🎛️ Distributed Multi-Agent Data Platform Hub")
@@ -31,7 +33,6 @@ with col1:
             st.error("🔑 OpenAI API Key required in the sidebar.")
         else:
             with st.spinner("AI Agent generating and streaming polymorphic payloads..."):
-                from src.producers.synth_agent import run_synthetic_production_agent
                 result = run_synthetic_production_agent(openai_key)
                 if result["status"] == "success":
                     st.success(f"🚀 Agent 1 successfully dispatched transactional variants for user: {result['user']} (${result['amount']})")
@@ -43,7 +44,6 @@ with col1:
     if st.button("🤖 Run Consumer AI Agent Loop"):
         if not openai_key: st.error("API Key required.")
         else:
-            from src.agent.ai_agent import build_consumer_agent
             graph = build_consumer_agent()
             output = graph.invoke({"raw_records": [], "log_report": ""})
             st.info(output["log_report"])

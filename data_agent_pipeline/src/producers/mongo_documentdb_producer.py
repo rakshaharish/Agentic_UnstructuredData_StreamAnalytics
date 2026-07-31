@@ -1,4 +1,5 @@
 import json
+import kafka
 from kafka import KafkaProducer
 
 def send_mongo_event(tx_id, user_id, merchant_name, amount):
