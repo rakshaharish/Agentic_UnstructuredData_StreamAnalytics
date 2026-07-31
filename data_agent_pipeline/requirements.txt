@@ -11,4 +11,4 @@ langgraph
 apache-airflow
 langchain
 pandas
-numpy
+delta-spark

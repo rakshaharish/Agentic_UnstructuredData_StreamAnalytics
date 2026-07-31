@@ -1,53 +1,44 @@
+import os
+import sys
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, current_timestamp
 
-import os
-import sys
-
-# Force Python and the JVM to register the Hadoop paths instantly
-os.environ["HADOOP_HOME"] = r"C:\hadoop"
-# Append the bin folder to the system execution PATH listing
-sys_path_target = r"C:\hadoop\bin"
-if sys_path_target not in os.environ["PATH"]:
-    os.environ["PATH"] += os.pathsep + sys_path_target
-
-
 def start_spark_stream():
+    # Dynamic absolute path calculation to stay cleanly inside your project root
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    landing_zone_path = os.path.join(base_dir, "historical_data_lake", "raw_landing_zone")
+    checkpoint_path = os.path.join(base_dir, "spark_checkpoints", "landing")
+
+    # Initialize PySpark targeting Kafka 4.2.0
+    # NOTE: If using Delta Lake, swap format("parquet") below for format("delta")
     spark = SparkSession.builder \
-        .appName("MultiModelLandingStream") \
-        .config("spark.jars.packages", 
-                "org.apache.spark:spark-sql-kafka-0-10_2.13:4.2.0,org.xerial:sqlite-jdbc:3.46.0.0") \
+        .appName("MultiModelLakeProcessor") \
+        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:4.2.0") \
         .getOrCreate()
 
+    # Read multi-model streams from Kafka
     raw_kafka_stream = spark.readStream \
         .format("kafka") \
         .option("kafka.bootstrap.servers", "localhost:9092") \
         .option("subscribe", "redis-tx-topic,neo4j-tx-topic,mongo-tx-topic") \
         .load()
 
+    # Transform payload structures into standard raw landing columns
     landing_zone_df = raw_kafka_stream.select(
         col("topic").alias("source_topic"),
         col("value").cast("string").alias("raw_payload"),
         current_timestamp().alias("landed_at")
     )
 
-    def write_to_db(batch_df, batch_id):
-        # Force class driver mapping string directly to Spark's internal proxy
-        batch_df.write \
-            .format("jdbc") \
-            .option("url", "jdbc:sqlite:historical_warehouse.db") \
-            .option("dbtable", "raw_landing_zone") \
-            .option("driver", "org.sqlite.JDBC") \
-            .mode("append") \
-            .save()
-
-
+    # DIRECT STORAGE WRITE: Native Parquet or Delta Lake format streaming sink
     query = landing_zone_df.writeStream \
-        .foreachBatch(write_to_db) \
-        .option("checkpointLocation", "./spark_checkpoints/landing") \
-        .start()
+        .format("parquet") \
+        .outputMode("append") \
+        .option("checkpointLocation", checkpoint_path) \
+        .start(landing_zone_path)
 
     query.awaitTermination()
+
 
 if __name__ == "__main__":
     start_spark_stream()
