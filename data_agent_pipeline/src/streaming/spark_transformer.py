@@ -9,12 +9,15 @@ def start_spark_stream():
     landing_zone_path = os.path.join(base_dir, "historical_data_lake", "raw_landing_zone")
     checkpoint_path = os.path.join(base_dir, "spark_checkpoints", "landing")
 
-    # 💥 FIX: Using forward slashes prevents Java from stripping the path indicators on Windows
+    # to guarantee Ollama and Docker don't trigger context-switching deadlocks.
     spark = SparkSession.builder \
+        .master("local[1]") \
         .appName("MultiModelLakeProcessor") \
         .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1") \
         .config("spark.driver.extraJavaOptions", "-Dhadoop.home.dir=C:/hadoop") \
         .config("spark.executor.extraJavaOptions", "-Dhadoop.home.dir=C:/hadoop") \
+        .config("spark.network.timeout", "800s") \
+        .config("spark.executor.heartbeatInterval", "100s") \
         .getOrCreate()
 
     # Read multi-model streams from Kafka
@@ -23,6 +26,7 @@ def start_spark_stream():
         .option("kafka.bootstrap.servers", "localhost:9092") \
         .option("subscribe", "redis-tx-topic,neo4j-tx-topic,mongo-tx-topic") \
         .load()
+        
 
     # Transform payload structures into standard raw landing columns
     landing_zone_df = raw_kafka_stream.select(

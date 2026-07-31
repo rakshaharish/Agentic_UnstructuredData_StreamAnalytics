@@ -3,6 +3,7 @@ import glob
 import pandas as pd
 import json
 import hashlib
+from datetime import datetime
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import ChatOllama 
 from langgraph.graph import StateGraph, START, END
@@ -67,7 +68,9 @@ def enforce_schema_and_write(state: ConsumerState) -> ConsumerState:
 
     cleansed_list = []
     
-    # 💥 DETERMINISTIC SCHEMATIC EXTRACTION: Bypasses LLM text formatting bugs entirely
+    # Capture the exact current timestamp for this processing batch execution loop
+    current_time_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    
     for record in state["raw_records"]:
         raw_ref_id = record["rowid"]
         source_topic = record["source_topic"]
@@ -99,25 +102,27 @@ def enforce_schema_and_write(state: ConsumerState) -> ConsumerState:
         except Exception:
             continue # Skip corrupted rows safely
 
+        # 💥 TIMESTAMP FIX: Attach the structured_at timestamp parameter into your data lake rows
         cleansed_list.append({
             "raw_ref_id": raw_ref_id,
             "user_id": str(user_id),
             "merchant_id": str(merchant_id),
-            "amount": float(amount)
+            "amount": float(amount),
+            "structured_at": current_time_str
         })
 
     if not cleansed_list:
         state["log_report"] = "Failed to parse any rows cleanly."
         return state
 
-    # 4. Commit verified records to disk data lake storage
+    # Commit verified records to disk data lake storage
     df_new_history = pd.DataFrame(cleansed_list)
     if not os.path.exists(STRUCTURED_HISTORY_FILE):
         df_new_history.to_csv(STRUCTURED_HISTORY_FILE, index=False)
     else:
         df_new_history.to_csv(STRUCTURED_HISTORY_FILE, mode="a", header=False, index=False)
 
-    # 5. Run LLM Audit as an evaluation observer (not a writing bottleneck)
+    # Run LLM Audit as an evaluation observer (not a writing bottleneck)
     try:
         llm = ChatOllama(model="llama3", temperature=0.1)
         prompt = ChatPromptTemplate.from_messages([

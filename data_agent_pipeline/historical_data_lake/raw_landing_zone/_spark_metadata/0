@@ -1,2 +1,2 @@
 v1
-{"path":"file:///C:/Users/raksh/Documents/Agentic_UnstructuredData_StreamAnalytics/data_agent_pipeline/historical_data_lake/raw_landing_zone/part-00000-2133d5b6-19cc-4212-8718-7422aae4421b-c000.snappy.parquet","size":511,"isDir":false,"modificationTime":1785536595237,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///C:/Users/raksh/Documents/Agentic_UnstructuredData_StreamAnalytics/data_agent_pipeline/historical_data_lake/raw_landing_zone/part-00000-49a0a120-e921-43a3-a513-62cb17023ea6-c000.snappy.parquet","size":511,"isDir":false,"modificationTime":1785538866395,"blockReplication":1,"blockSize":33554432,"action":"add"}

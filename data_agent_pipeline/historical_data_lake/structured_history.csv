@@ -1,27 +1,27 @@
-raw_ref_id,user_id,merchant_id,amount
-bcc7bf607f445915e951441ef3d15510,SantosNoble22,ElegantToysInc,42.99
-6a0ac3fd6904997b8196ffdf0e3caf3f,SantosNoble22,ElegantToysInc,42.99
-34728c46a4994ed197d6ace43ce492fe,SantosNoble22,ElegantToysInc,42.99
-0754674154d5b2c36b591a2944809af8,EvelynFitzpatrick,Walmart,42.99
-d313a89f130995b8acb5f7f3bece03fc,SantosNoble22,ElegantToysInc,42.99
-b773a82bb21783d570b24042658ec452,EvelynFitzpatrick,Walmart,42.99
-60ca5d1487ff58b342c8b121e34ba20f,EvelynFitzpatrick,Walmart,42.99
-81ddc4b74fe314a19c000b88580373d0,SantosNoble22,ElegantToysInc,42.99
-ffa565d81bf10adf1a2c85a03442657e,EUGENIAGOMEZ,WALGREENS,24.99
-1b8c0ae6d5cc296d343565edf053fc83,EvelynFitzpatrick,Walmart,42.99
-2b10c91fe280c8293ec8d38fffffa481,SantosNoble22,ElegantToysInc,42.99
-deab1af780357571408da09d70d98b79,EUGENIAGOMEZ,WALGREENS,24.99
-41de1c9a5d5df92679cdcb1667637891,EvelynFitzpatrick,Walmart,42.99
-6f7bda7da6afd111ae13dffb7e75f93d,EUGENIAGOMEZ,WALGREENS,24.99
-cda6a80e75614be45c864cc6efbb65c5,EvelynFitzpatrick,Walmart,42.99
-8c7ea15b0c579bc8f8bc3f64b0586723,SantosNoble22,ElegantToysInc,42.99
-bb7e7852d1601bc47ab3d2353367fa57,EvelynMendez34,WalmartSupercenter1346,42.75
-34d3af33bd8a448ea1b4c94c4c0e7379,EvelynMendez34,WalmartSupercenter1346,42.75
-926e8bc6418c53af63ca8b93f8d86136,EUGENIAGOMEZ,WALGREENS,24.99
-d2aca3c8b6ddc6ff15ac950a99d9b234,EvelynFitzpatrick,Walmart,42.99
-ef7c046be4c2eb046d73dad8ece60e94,SantosNoble22,ElegantToysInc,42.99
-4ed74bbd77da548dcd282b4233f368eb,EUGENIAGOMEZ,WALGREENS,24.99
-e7a289d595b74bbddff185e27fddac19,EvelynFitzpatrick,Walmart,42.99
-810771de8075aeec9298d1e13815791b,EUGENIAGOMEZ,WALGREENS,24.99
-0d9f195ac30b29ee8a3b1a80ff6c3336,EvelynMendez34,WalmartSupercenter1346,42.75
-1c620b92c92c2efc051c9fe60de17a1e,EvelynFitzpatrick,Walmart,42.99
+raw_ref_id,user_id,merchant_id,amount,structured_at
+2d860426657910b4796e339709a766b1,1234567890,ABC Corporation,1000.5,2026-07-31 23:01:52
+5717b4541a78f510f0ff3f576d5d7d0a,AI_Finance_Generated_Data_12345,Amazon_Retailer_Inc.,2345.67,2026-07-31 23:02:44
+851131ca497c0b0f5fc359fc4a812208,JohnDoe123,BestBuy,12.99,2026-07-31 23:02:44
+ccdb81505956136f7ca1e517fccfba73,Alpha_12345,RetailerXYZ_Inc,1456.23,2026-07-31 23:07:52
+562bc2997c865bee4b286378adb7308e,AlphanumericHolderName,VendorRetailerName,123.45,2026-07-31 23:08:19
+f8deb449f33c988ef8bb8efa1e45d69b,Alpha_12345,RetailerXYZ_Inc,1456.23,2026-07-31 23:08:19
+5517894a09c21001a259ce48d495ab7f,GordonCooper,BestBuy,123.45,2026-07-31 23:09:11
+e4aac60855ecd988b6cf9bce58c19818,JohnDoe123,BestBuy,12.99,2026-07-31 23:09:11
+712b67413f7ade37fa403b90950b4ec3,AlphanumericHolderName,VendorRetailerName,123.45,2026-07-31 23:09:11
+ba2ae057cfe093711cfd8fc448d38ca0,AlphanumericHolderName,VendorRetailerName,1000.5,2026-07-31 23:09:11
+53216e82f97f464fdaffcd312148ca21,Alpha_12345,RetailerXYZ_Inc,1456.23,2026-07-31 23:09:11
+4f588c9f6159809b4dd784b9b4022886,JohnDoe1234567890,BestBuyInc,99.99,2026-07-31 23:10:02
+0aac9355912f733857c1562f6108126d,1234567890,ABC Corporation,1000.5,2026-07-31 23:10:02
+881f57e22339e660347a070a0f42a1af,AI_Finance_Generated_Data_12345,Amazon_Retailer_Inc.,2345.67,2026-07-31 23:10:02
+ae6d5b70de15299f8d632ada9ed26f33,GordonCooper,BestBuy,123.45,2026-07-31 23:10:02
+cb37227e76c965f3ae380028975820ba,JohnDoe123,BestBuy,12.99,2026-07-31 23:10:02
+b9764d95141960f264c36df9888d3646,AlphanumericHolderName,VendorRetailerName,123.45,2026-07-31 23:10:02
+cfde7d71a196b91fcafbd94c918fba31,AlphanumericHolderName,VendorRetailerName,1000.5,2026-07-31 23:10:02
+3d0bb2777495552ef4ded64c35c147af,Alpha_12345,RetailerXYZ_Inc,1456.23,2026-07-31 23:10:02
+8760c51fcab7f338e7f62edd7e5f05e7,QXJ0aWNsZS5iYXNl,Z3VhcmRlcmlvbi5zaWxsaW4=,12345.67,2026-07-31 23:12:15
+68ff71d0dfa512a5c690bc1dea8dcce7,AI_Finance_Generated_Data_12345,Amazon_Retailer_Inc.,2345.67,2026-07-31 23:12:15
+f2ccb049b080bbf0285c464f5c21f3d5,GordonCooper,BestBuy,123.45,2026-07-31 23:12:15
+01e3d3f1b19cc685da83ffa3b744837e,JohnDoe123,BestBuy,12.99,2026-07-31 23:12:15
+d05807d9796ef404e64a02def80c3efd,AlphanumericHolderName,VendorRetailerName,123.45,2026-07-31 23:12:15
+12a88fe2c4fb176dd2f474d258ab7a08,AlphanumericHolderName,VendorRetailerName,1000.5,2026-07-31 23:12:15
+254640caff9bc1f8a89363a52d7afe84,Alpha_12345,RetailerXYZ_Inc,1456.23,2026-07-31 23:12:15
