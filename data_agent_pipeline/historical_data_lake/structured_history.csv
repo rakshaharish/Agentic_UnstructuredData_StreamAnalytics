@@ -1,0 +1,5 @@
+raw_ref_id,user_id,merchant_id,amount,structured_at
+8d63e12f4de5a5dc1b8629e5ef2f9442,1234567890,ABCCompanyRetailerName,10000.99,2026-07-31 23:55:47
+31e48057bd48079fcb37dee70fe96250,AI_FinancialData_1234,BankingInstitutionXYZ,123.45,2026-07-31 23:56:39
+456a80a2252825ab566dd23842dc91df,JohnDoe123,Walmart Inc.,12.99,2026-07-31 23:57:18
+50d61db0d40a2b53f2bdc678b00889a9,AI_FinancialData_1234,BankingInstitutionXYZ,123.45,2026-07-31 23:57:18
