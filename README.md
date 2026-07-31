@@ -39,8 +39,10 @@ data-agent-pipeline/
 🚀 Execution Steps
 
 Environment Preparation: Install all Python requirements locally:
-bash
+``` text
+bash 
 pip install -r requirements.txt
+```
 
 Expose Dashboard Interface: 
 Run the main Streamlit frontend panel:
