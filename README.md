@@ -38,7 +38,13 @@ data-agent-pipeline/
         └── Streamlit_UI.py               # Streamlit orchestration & monitoring panel
 ```
 
-🚀 Execution Steps
+## 🚀 Execution Steps
+
+NOTE: The LLM used for this project is "llama3" local model from "Ollama". Any other LLM can also be used (Example: OpenAI models can be easily integrated to the code on using an API Key). To setup the "llama3" local model, follow the below steps:
+-> Download and install Ollama locally
+-> Download the Llama3 model by running this in the Powershell : "ollama run llama3"
+-> On a dedicated terminal, keep this LLM active to be used for the dashboard by rerunning : "ollama run llama3"
+-> Check if the LLM is running on this port : "http://localhost:11434/"
 
 1. Environment Preparation: Before running the project, run the below commands in the project folder to create and activate python virtual environment.
 ```text
