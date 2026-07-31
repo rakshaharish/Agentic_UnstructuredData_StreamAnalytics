@@ -3,6 +3,7 @@ import pandas as pd
 import json
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama 
 from langgraph.graph import StateGraph, START, END
 from src.schema_enforcer_agent.graph_state import ConsumerState
 
@@ -25,7 +26,9 @@ def enforce_schema_and_write(state: ConsumerState) -> ConsumerState:
         state["log_report"] = "No new raw records found to process."
         return state
 
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.1)
+    # llm = ChatOpenAI(model="gpt-4o", temperature=0.1)
+    llm = ChatOllama(model="llama3", temperature=0.1, format="json")  # Forces the local model to only respond in clean JSON arrays/objects
+    
     prompt = ChatPromptTemplate.from_messages([
         ("system", """Parse mixed credit card transactional fields into a clean flat schema: user_id, merchant_id, amount.
         Return raw JSON arrays ONLY: [{{"raw_ref_id": rowid, "user_id": "str", "merchant_id": "str", "amount": float}}]
