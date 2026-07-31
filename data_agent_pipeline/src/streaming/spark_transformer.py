@@ -1,6 +1,17 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, current_timestamp
 
+import os
+import sys
+
+# Force Python and the JVM to register the Hadoop paths instantly
+os.environ["HADOOP_HOME"] = r"C:\hadoop"
+# Append the bin folder to the system execution PATH listing
+sys_path_target = r"C:\hadoop\bin"
+if sys_path_target not in os.environ["PATH"]:
+    os.environ["PATH"] += os.pathsep + sys_path_target
+
+
 def start_spark_stream():
     spark = SparkSession.builder \
         .appName("MultiModelLandingStream") \
