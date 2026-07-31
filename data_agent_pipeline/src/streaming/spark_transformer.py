@@ -15,7 +15,8 @@ if sys_path_target not in os.environ["PATH"]:
 def start_spark_stream():
     spark = SparkSession.builder \
         .appName("MultiModelLandingStream") \
-        .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1") \
+        .config("spark.jars.packages", 
+                "org.apache.spark:spark-sql-kafka-0-10_2.13:4.2.0,org.xerial:sqlite-jdbc:3.46.0.0") \
         .getOrCreate()
 
     raw_kafka_stream = spark.readStream \
@@ -31,12 +32,15 @@ def start_spark_stream():
     )
 
     def write_to_db(batch_df, batch_id):
+        # Force class driver mapping string directly to Spark's internal proxy
         batch_df.write \
             .format("jdbc") \
             .option("url", "jdbc:sqlite:historical_warehouse.db") \
             .option("dbtable", "raw_landing_zone") \
+            .option("driver", "org.sqlite.JDBC") \
             .mode("append") \
             .save()
+
 
     query = landing_zone_df.writeStream \
         .foreachBatch(write_to_db) \
