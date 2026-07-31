@@ -35,3 +35,24 @@ data-agent-pipeline/
     └── app/
         └── Streamlit_UI.py               # Streamlit orchestration & monitoring panel
 ```
+
+🚀 Execution Steps
+
+Environment Preparation: Install all Python requirements locally:
+bash
+pip install -r requirements.txt
+
+Expose Dashboard Interface: 
+Run the main Streamlit frontend panel:
+bash
+streamlit run src/app/UI.py
+
+Boot Environment Containers: Provide an OpenAI API Key in the panel sidebar, then click Boot Infrastructure Setup to start the local multi-topic Kafka cluster broker.
+
+Initialize Streaming Transformers: Click Execute Spark Stream Pipeline to launch the PySpark consumer loop listening to your background topics.
+
+Synthesize & Push Transactions: Click Synthesize & Route Event. This triggers Agent 1 (synth_agent.py) to build a high-fidelity transaction payload and distribute it to your multi-model producers.
+
+Enforce Schema Rules via AI: Click Run Consumer AI Agent Loop to manually prompt Agent 2 (ai_agent.py) to parse, audit, and clean the landing records into your structured analytical reporting table layer.
+
+Production Workflow Scheduling: Place the dags/ module folder inside your active Airflow repository directory path to run the data collection and auditing steps automatically every hour.
