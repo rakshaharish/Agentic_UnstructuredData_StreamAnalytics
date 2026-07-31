@@ -44,10 +44,11 @@ bash
 pip install -r requirements.txt
 ```
 
-Expose Dashboard Interface: 
-Run the main Streamlit frontend panel:
+Expose Dashboard Interface: Run the main Streamlit frontend panel:
+```text
 bash
 streamlit run src/app/UI.py
+```
 
 Boot Environment Containers: Provide an OpenAI API Key in the panel sidebar, then click Boot Infrastructure Setup to start the local multi-topic Kafka cluster broker.
 
