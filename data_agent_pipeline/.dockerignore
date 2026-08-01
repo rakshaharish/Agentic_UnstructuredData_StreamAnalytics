@@ -1,0 +1,7 @@
+.venv
+__pycache__
+*.pyc
+.git
+historical_data_lake/*
+!historical_data_lake/.gitkeep
+spark_checkpoints/*

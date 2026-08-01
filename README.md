@@ -16,8 +16,12 @@ This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic cred
 ## 📁 Repository Structure
 ```text
 data-agent-pipeline/
-├── docker-compose.yml          # Infrastructure: Multi-topic Kafka cluster broker
-├── requirements.txt            # Python deployment dependencies
+├── docker-compose.yml          # Infrastructure: Kafka, Zookeeper, Ollama, Streamlit UI
+├── Dockerfile.app              # App image (Streamlit UI + Spark + deps, zero manual install)
+├── Dockerfile                  # Ollama image (pre-loads llama3 on startup)
+├── entrypoint.sh               # Ollama startup: serve + pull llama3
+├── requirements-app.txt        # Runtime deps installed inside the Docker image
+├── requirements.txt            # Python deployment dependencies (host installs)
 ├── historical_data_lake/       # Embedded Data Lake (Auto-generated landing & history tables in parquet file format)
 |    └── raw_landing_zone/*.parquet  # raw parquet files landed from the Source data stream
 |    └── structured_history.csv # Final cleaned csv created after the Agent-2 unifies different data sources and enforces schema
@@ -38,7 +42,36 @@ data-agent-pipeline/
         └── Streamlit_UI.py               # Streamlit orchestration & monitoring panel
 ```
 
-## 🚀 Execution Steps
+## 🐳 Docker Deployment (Zero-Install)
+
+Containerize the full project so a fresh clone runs without installing any Python
+dependencies or Ollama on the host machine — only [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+is required.
+
+```text
+>> cd data_agent_pipeline
+>> docker compose up -d --build
+```
+
+This brings up all four services:
+
+- `zookeeper` + `kafka` — multi-topic Kafka broker (port 9092)
+- `ollama` — Ollama server, auto-pulls the `llama3` model on first start (port 11434)
+- `streamlit` — full app image (Streamlit UI + PySpark/Java + all Python deps),
+  launched at http://localhost:8501/
+
+First boot is slower because the `llama3` model (~4.7GB) downloads and the app image
+is built. The model and data lake files persist across restarts via Docker volumes.
+
+- Inside the container, the app connects to Kafka (`kafka:29092`) and Ollama
+  (`http://ollama:11434`) automatically via environment variables.
+- The **Boot Infrastructure Setup** button is informational when running inside
+  Docker since the whole stack is already up.
+- The **Execute Spark Stream Pipeline** button runs Spark inside the app container;
+  data lands in `./historical_data_lake` on your host disk.
+- Stop everything with `docker compose down` (add `-v` to also wipe the model/data volumes).
+
+## 🚀 Execution Steps (Manual / Local)
 
 NOTE: The LLM used for this project is "llama3" local model from "Ollama". Any other LLM can also be used (Example: OpenAI models can be easily integrated to the code on using an API Key). To setup the "llama3" local model, follow the below steps:
 ```text

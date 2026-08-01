@@ -124,7 +124,8 @@ def enforce_schema_and_write(state: ConsumerState) -> ConsumerState:
 
     # Run LLM Audit as an evaluation observer (not a writing bottleneck)
     try:
-        llm = ChatOllama(model="llama3", temperature=0.1)
+        llm = ChatOllama(model="llama3", temperature=0.1,
+                         base_url=os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434"))
         prompt = ChatPromptTemplate.from_messages([
             ("system", "Review this structured compliance list and summarize anomalies or high velocities."),
             ("user", "Audit these transactions: {data}")

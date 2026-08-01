@@ -20,10 +20,12 @@ def start_spark_stream():
         .config("spark.executor.heartbeatInterval", "100s") \
         .getOrCreate()
 
+    kafka_bootstrap_servers = os.environ.get("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
+
     # Read multi-model streams from Kafka
     raw_kafka_stream = spark.readStream \
         .format("kafka") \
-        .option("kafka.bootstrap.servers", "localhost:9092") \
+        .option("kafka.bootstrap.servers", kafka_bootstrap_servers) \
         .option("subscribe", "redis-tx-topic,neo4j-tx-topic,mongo-tx-topic") \
         .load()
         

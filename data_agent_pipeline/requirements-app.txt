@@ -1,0 +1,15 @@
+streamlit
+pyspark
+redis
+neo4j
+pymongo
+kafka-python
+langchain-core
+langchain-openai
+langchain-ollama
+langgraph
+langchain
+pandas
+delta-spark
+redis
+numpy

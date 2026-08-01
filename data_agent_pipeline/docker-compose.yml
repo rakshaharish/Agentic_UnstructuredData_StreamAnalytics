@@ -1,5 +1,4 @@
-
-version: '3.8'
+name: pipeline
 
 services:
   zookeeper:
@@ -22,3 +21,34 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  ollama:
+    build: .
+    container_name: pipeline_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: pipeline_streamlit
+    depends_on:
+      - kafka
+      - ollama
+    ports:
+      - "8501:8501"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      OLLAMA_BASE_URL: http://ollama:11434
+      APP_IN_CONTAINER: "true"
+    volumes:
+      - ./historical_data_lake:/app/historical_data_lake
+      - ./spark_checkpoints:/app/spark_checkpoints
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

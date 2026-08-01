@@ -1,9 +1,12 @@
 import json
+import os
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import ChatOllama
 from src.producers.redis_keyval_producer import send_redis_event
 from src.producers.neo4j_graph_producer import send_neo4j_event
 from src.producers.mongo_documentdb_producer import send_mongo_event
+
+OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
 
 def run_synthetic_production_agent(data_mode):
     """
@@ -11,7 +14,7 @@ def run_synthetic_production_agent(data_mode):
     matching the requested database format and routes it to the specific Kafka topic.
     """
     # Initialize the local Ollama structural JSON runtime configuration
-    llm = ChatOllama(model="llama3", temperature=0.7, format="json")
+    llm = ChatOllama(model="llama3", temperature=0.7, format="json", base_url=OLLAMA_BASE_URL)
     
     # Doubled curly braces escape the static JSON fields from LangChain's input validation
     prompt_rules = ""

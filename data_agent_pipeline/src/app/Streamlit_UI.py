@@ -23,8 +23,11 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader("🛠️ Step-1 : Operations Dashboard")
     if st.button("🚀 Boot Infrastructure Setup"):
-        subprocess.Popen(["docker-compose", "up", "-d"])
-        st.success("Docker streaming components active!")
+        if os.environ.get("APP_IN_CONTAINER", "false") == "true":
+            st.info("All infrastructure (Kafka + Ollama) is already running inside Docker.")
+        else:
+            subprocess.Popen(["docker-compose", "up", "-d"])
+            st.success("Docker streaming components active!")
 
     if st.button("⚡ Execute Spark Stream Pipeline"):
         subprocess.Popen([sys.executable, "-m", "src.streaming.spark_transformer"])
