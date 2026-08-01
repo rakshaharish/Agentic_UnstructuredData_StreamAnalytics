@@ -1,0 +1,10 @@
+{
+  "dependencies": [
+    "-r requirements.txt"
+  ],
+  "graphs": {
+    "schema_enforcer_agent": "./src/schema_enforcer_agent/ai_agent.py:build_consumer_agent"
+  },
+  "python_version": "3.11",
+  "env": "./.env"
+}
