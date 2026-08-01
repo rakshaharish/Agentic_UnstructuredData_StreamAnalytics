@@ -1,5 +1,5 @@
 streamlit
-pyspark
+pyspark==3.5.1
 redis
 neo4j
 pymongo
@@ -11,6 +11,6 @@ langgraph
 apache-airflow
 langchain
 pandas
-delta-spark
+delta-spark==3.2.0
 redis
 numpy
