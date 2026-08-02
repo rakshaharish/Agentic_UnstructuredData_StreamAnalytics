@@ -53,6 +53,7 @@ dependencies or Ollama on the host machine — only [Docker Desktop](https://www
 is required.
 
 ```text
+bash
 >> cd data_agent_pipeline
 >> docker compose up -d --build
 ```
