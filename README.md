@@ -8,7 +8,7 @@ This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic cred
 ##  ✨ Concepts & Technologies
 1. Python - Development Programming Language
 2. Graph Data (neo4j), Key-Value Data (redis), Document Data (mongo) - Types of unstructured data ingested in the project
-3. LangChain, LangGraph - AI agent development
+3. LangChain, LangGraph, Ollama (Llama3) - AI agent development
 4. Kafka, Spark, Pandas, SparkSQL - Streaming and data processing/transformation
 5. Streamlit - Frontend Dashboard (UI)
 6. Apache Airflow - Orchestration
