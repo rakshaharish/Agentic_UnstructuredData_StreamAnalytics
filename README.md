@@ -1,11 +1,11 @@
-#  🌟 Agentic Unstructured Data Stream Analytics
+#  Agentic Unstructured Data Stream Analytics
 Enterprise-grade, event-driven multi-source data ingestion pipeline with AI Agent orchestration.
 
 This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic credit card transactions (graph data, document data and key-value data sources) into a multi-topic Kafka broker, processes continuous micro-batches using Apache Spark Structured Streaming, and utilizes a stateful LangGraph AI Consumer (Agent-2) to enforce schema definitions and build a curated, structured historical layer. The entire system is monitored via Streamlit frontend and orchestrated via Apache Airflow, and is containerized using docker-compose.
 
 [NOTE: Refer to the folder named "App_UI_Screenshots" to see how the actual application looks like]
 
-##  ✨ Concepts & Technologies
+##  Concepts & Technologies
 1. Python - Development Programming Language
 2. Graph Data (neo4j), Key-Value Data (redis), Document Data (mongo) - Types of unstructured data ingested in the project
 3. LangChain, LangGraph, Ollama (Llama3) - AI agent development
@@ -15,7 +15,7 @@ This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic cred
 7. Docker - Containerization & Deployment
 8. VS Code - IDE for development
 
-## 📁 Repository Structure
+## Repository Structure
 ```text
 data-agent-pipeline/
 ├── docker-compose.yml          # Infrastructure: Kafka, Zookeeper, Ollama, Streamlit UI
@@ -44,7 +44,7 @@ data-agent-pipeline/
         └── Streamlit_UI.py               # Streamlit orchestration & monitoring panel
 ```
 
-## 🐳 Docker Deployment (Zero-Install)
+## Docker Deployment 
 
 Containerize the full project so a fresh clone runs without installing any Python
 dependencies or Ollama on the host machine — only [Docker Desktop](https://www.docker.com/products/docker-desktop/)
@@ -73,7 +73,7 @@ is built. The model and data lake files persist across restarts via Docker volum
   data lands in `./historical_data_lake` on your host disk.
 - Stop everything with `docker compose down` (add `-v` to also wipe the model/data volumes).
 
-## 🚀 Execution Steps (Manual / Local)
+## Execution Steps (Manual / Local)
 
 NOTE: The LLM used for this project is "llama3" local model from "Ollama". Any other LLM can also be used (Example: OpenAI models can be easily integrated to the code on using an API Key). To setup the "llama3" local model, follow the below steps:
 ```text
