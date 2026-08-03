@@ -8,7 +8,7 @@ This project leverages an AI Data Synthesizer (Agent-1) to push polymorphic cred
 [NOTE: Refer to the folder named "App_UI_Screenshots" to see how the actual application works]
 
 ##  Concepts & Technologies
-1. Python - Development Programming Language
+1. Python - Development Programming Language 
 2. Graph Data (neo4j), Key-Value Data (redis), Document Data (mongo) - Types of unstructured data ingested in the project
 3. LangChain, LangGraph, Ollama (Llama3) - AI agent development
 4. Kafka, Spark, Pandas, SparkSQL - Streaming and data processing/transformation
@@ -43,7 +43,7 @@ data-agent-pipeline/
     │   ├── graph_state.py      # Stateful TypedDict model for LangGraph
     │   └── ai_agent.py         # Agent 2: Stateful LangGraph schema enforcement engine
     └── app/
-        └── Streamlit_UI.py               # Streamlit orchestration & monitoring panel
+        └── Streamlit_UI.py     # Streamlit orchestration & monitoring panel
 ```
 
 ## Docker Deployment 
